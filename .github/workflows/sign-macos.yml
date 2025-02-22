@@ -1,0 +1,46 @@
+name: Sign and Notarize macOS Binary
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  sign-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Apple Certificate
+        run: |
+          echo "$APPLE_CERTIFICATE" | base64 --decode > certificate.p12
+          security create-keychain -p "" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import certificate.p12 -k build.keychain -P "$APPLE_CERT_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+
+      - name: Download macOS binaries
+        run: |
+          curl -L -o docker.client-darwin-arm64 https://github.com/softdist/docker.client/releases/download/v0.1.8/docker.client-darwin-arm64
+          curl -L -o docker.client-darwin-amd64 https://github.com/softdist/docker.client/releases/download/v0.1.8/docker.client-darwin-amd64
+          chmod +x docker.client-*
+
+      - name: Code Sign Binaries
+        run: |
+          codesign --force --deep --sign "Developer ID Application: $APPLE_TEAM_ID" docker.client-darwin-arm64
+          codesign --force --deep --sign "Developer ID Application: $APPLE_TEAM_ID" docker.client-darwin-amd64
+
+      - name: Notarize Binaries
+        run: |
+          xcrun notarytool submit docker.client-darwin-arm64 \
+            --apple-id "$APPLE_ID" --password "$APPLE_ID_PASSWORD" --team-id "$APPLE_TEAM_ID"
+          xcrun notarytool submit docker.client-darwin-amd64 \
+            --apple-id "$APPLE_ID" --password "$APPLE_ID_PASSWORD" --team-id "$APPLE_TEAM_ID"
+
+      - name: Upload Signed Binaries
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            docker.client-darwin-arm64
+            docker.client-darwin-amd64
