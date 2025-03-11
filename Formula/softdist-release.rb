@@ -1,5 +1,5 @@
-class Sd < Formula
-  desc "SD Tools: sd-run, sd-install, sd-extricate"
+class SoftdistRelease < Formula
+  desc "Software Distribution: Releases"
   homepage "https://github.com/softdist/docker.client"
   version "main"
   license "MIT"
