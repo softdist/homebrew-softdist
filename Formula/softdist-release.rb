@@ -25,13 +25,6 @@ class SoftdistRelease < Formula
     end
   end
 
-  on_windows do
-    if Hardware::CPU.intel?
-      url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-run-windows-amd64.exe"
-      sha256 "633e2ef06229846fa19c95182a78bf28a8881d3f3be81ca1c7577404599038db"
-    end
-  end
-
   # sd-install resource
   resource "sd-install" do
     on_macos do
@@ -51,13 +44,6 @@ class SoftdistRelease < Formula
       elsif Hardware::CPU.arm?
         url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-linux-arm64"
         sha256 "b15082354cc2426d0c62ff60c130e35a7a04f905097975346265410a2e30ee82"
-      end
-    end
-
-    on_windows do
-      if Hardware::CPU.intel?
-        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-windows-amd64.exe"
-        sha256 "e692e552eb423625cadefc185c89d54790eb947504f8620ba3bed0e7bd331741"
       end
     end
   end
@@ -83,13 +69,6 @@ class SoftdistRelease < Formula
         sha256 "975c76fc07c84918e454cf66c36f4b90dd524787caaec32736f6e33ad3a76149"
       end
     end
-
-    on_windows do
-      if Hardware::CPU.intel?
-        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-extricate-windows-amd64.exe"
-        sha256 "fb2d54047d3b1a45a9e13b9d9d1fd1ddc0502c75bc61d5d98280ff2fe44aa350"
-      end
-    end
   end
 
   # Correct install method with explicit handling
@@ -103,8 +82,6 @@ class SoftdistRelease < Formula
       "linux-amd64"
     elsif OS.linux? && Hardware::CPU.arm?
       "linux-arm64"
-    elsif OS.windows? && Hardware::CPU.intel?
-      "windows-amd64"
     end
 
     bin.install "sd-run-#{arch}" => "sd-run"
