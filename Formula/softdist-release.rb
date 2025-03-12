@@ -1,27 +1,34 @@
 class SoftdistRelease < Formula
   desc "Software Distribution: Releases"
   homepage "https://github.com/softdist/docker.client"
-  version "main"
+  version "v0.3.4"
   license "MIT"
 
   # Main binary URL
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/softdist/docker.client/releases/download/main/sd-run-darwin-amd64"
-      sha256 "cc102989665bc7aec81e3319a65375782b7e46262968ffb92b7a47bc10761b63"
+      url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-run-darwin-amd64"
+      sha256 "ac8955f74ef5fed08cd103cc0d8b6a8e8e7284defcbd0e7e2f0bd0066f0c5bcb"
     elsif Hardware::CPU.arm?
-      url "https://github.com/softdist/docker.client/releases/download/main/sd-run-darwin-arm64"
-      sha256 "d6ebdef1d01d6b75ea28c7a8a711f3bbb26384dc16812f3fe3aafa2fc83e0c08"
+      url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-run-darwin-arm64"
+      sha256 "66e5232e8da25b694f18b05a5ed46343efc867ac34346565cc324cce3a21e200"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/softdist/docker.client/releases/download/main/sd-run-linux-amd64"
-      sha256 "b98c9f21a55af87335d1ab59679dcaab0d8f3b09769a35c3a7f8c3a7cbce5b1f"
+      url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-run-linux-amd64"
+      sha256 "30f432a6cf51e4438ffc0dcddc266f682f5afc78fa94b643f4b294379cd64028"
     elsif Hardware::CPU.arm?
-      url "https://github.com/softdist/docker.client/releases/download/main/sd-run-linux-arm64"
-      sha256 "d599c462a4875799d4f28b91380692b5ad66130ff8cd7af6d403d3d0e35618ad"
+      url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-run-linux-arm64"
+      sha256 "a6e423ed49aa8003a4eeddc279ead57caa85127a5ca0a43488628848f9a436d5"
+    end
+  end
+
+  on_windows do
+    if Hardware::CPU.intel?
+      url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-run-windows-amd64.exe"
+      sha256 "633e2ef06229846fa19c95182a78bf28a8881d3f3be81ca1c7577404599038db"
     end
   end
 
@@ -29,21 +36,28 @@ class SoftdistRelease < Formula
   resource "sd-install" do
     on_macos do
       if Hardware::CPU.intel?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-install-darwin-amd64"
-        sha256 "62c40b960b9fed52bf391d0dd91496ac9a7ee80311eb01370712b2574b03bd89"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-darwin-amd64"
+        sha256 "a157250531eb4806f0b9f3b9324df8100f7ca8f45358271ea33a165205a652bc"
       elsif Hardware::CPU.arm?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-install-darwin-arm64"
-        sha256 "736d26032ee788eead96be3ebb4eee61694fbb3e6476abca0e896b4d058f9d9e"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-darwin-arm64"
+        sha256 "74243fabb8d01a4d73e723ef372837e8f81f03309c9e67adaaee9d9d85d8f252"
       end
     end
 
     on_linux do
       if Hardware::CPU.intel?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-install-linux-amd64"
-        sha256 "70c767689c5623316ccdc65792c42a20bc10320860b7450e6d9ed55ac06e1905"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-linux-amd64"
+        sha256 "4edc9ffcda4a0e67a8c7f279ca9cc4953256bb660f1ce1e185fcb72f6bd105e2"
       elsif Hardware::CPU.arm?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-install-linux-arm64"
-        sha256 "c107fdd5b629832a99aa845ff692dd6bda033c60cc86e6bd3c5c2f6d57fecf2c"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-linux-arm64"
+        sha256 "b15082354cc2426d0c62ff60c130e35a7a04f905097975346265410a2e30ee82"
+      end
+    end
+
+    on_windows do
+      if Hardware::CPU.intel?
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-install-windows-amd64.exe"
+        sha256 "e692e552eb423625cadefc185c89d54790eb947504f8620ba3bed0e7bd331741"
       end
     end
   end
@@ -52,21 +66,28 @@ class SoftdistRelease < Formula
   resource "sd-extricate" do
     on_macos do
       if Hardware::CPU.intel?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-extricate-darwin-amd64"
-        sha256 "8a0427ac0d29cd4bbe816c56b7c4c76a13a641b33aa4406e7f63c346a014ce87"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-extricate-darwin-amd64"
+        sha256 "12c695514d304302261740ca0d7d6e2c9a238e5bd2085c880b83bbe42ffe69a6"
       elsif Hardware::CPU.arm?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-extricate-darwin-arm64"
-        sha256 "362e123bf6035ce5279ba4e1a6b5fc5ec01a1af06d3c9cb7b2970c3bb2899cfe"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-extricate-darwin-arm64"
+        sha256 "17cc17df1d89f54e1830ebacb366611c4143390173826f49dd8395ca6080e298"
       end
     end
 
     on_linux do
       if Hardware::CPU.intel?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-extricate-linux-amd64"
-        sha256 "cb7ec36dafe0a2290bc262f73e0ca2e25036338c3b2922b000875aa75a276fdd"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-extricate-linux-amd64"
+        sha256 "7b87cf8ebffd23546d7289c0bc583846ebf3e9b76a3ecb4ac62368c44971dd71"
       elsif Hardware::CPU.arm?
-        url "https://github.com/softdist/docker.client/releases/download/main/sd-extricate-linux-arm64"
-        sha256 "cf7c99e3a80ad167b7a5f30e375a7d3d74e19142058fa28669f7bd1f553aa78c"
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-extricate-linux-arm64"
+        sha256 "975c76fc07c84918e454cf66c36f4b90dd524787caaec32736f6e33ad3a76149"
+      end
+    end
+
+    on_windows do
+      if Hardware::CPU.intel?
+        url "https://github.com/softdist/docker.client/releases/download/v0.3.4/sd-extricate-windows-amd64.exe"
+        sha256 "fb2d54047d3b1a45a9e13b9d9d1fd1ddc0502c75bc61d5d98280ff2fe44aa350"
       end
     end
   end
@@ -82,6 +103,8 @@ class SoftdistRelease < Formula
       "linux-amd64"
     elsif OS.linux? && Hardware::CPU.arm?
       "linux-arm64"
+    elsif OS.windows? && Hardware::CPU.intel?
+      "windows-amd64"
     end
 
     bin.install "sd-run-#{arch}" => "sd-run"
